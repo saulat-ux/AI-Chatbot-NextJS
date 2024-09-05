@@ -101,8 +101,15 @@ export function PromptForm({
         <div className="absolute right-0 top-[13px] sm:right-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button type="submit" size="icon" disabled={input === ''}>
-                <IconArrowElbow />
+              <Button
+                type="submit"
+                size="icon"
+                disabled={input === ''}
+                style={{
+                  background: 'rgba(34, 197, 94, 1)'
+                }}
+              >
+                <IconArrowElbow className="text-white" />
                 <span className="sr-only">Send message</span>
               </Button>
             </TooltipTrigger>
