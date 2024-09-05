@@ -11,6 +11,8 @@ import { Message, Session } from '@/lib/types'
 import { usePathname, useRouter } from 'next/navigation'
 import { useScrollAnchor } from '@/lib/hooks/use-scroll-anchor'
 import { toast } from 'sonner'
+import { PromptForm } from './prompt-form'
+import { FooterText } from './footer'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: Message[]
@@ -58,27 +60,46 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
 
   return (
     <div
-      className="group w-full overflow-auto pl-0 peer-[[data-state=open]]:lg:pl-[250px] peer-[[data-state=open]]:xl:pl-[300px]"
+      className="group w-full h-screen flex justify-center items-center overflow-auto pl-0 peer-[[data-state=open]]:lg:pl-[250px] peer-[[data-state=open]]:xl:pl-[300px]"
       ref={scrollRef}
     >
+      {/* Content container with padding */}
       <div
-        className={cn('pb-[200px] pt-4 md:pt-10', className)}
+        className={cn('w-full pt-[100px] md:pt-2', className)}
         ref={messagesRef}
       >
         {messages.length ? (
           <ChatList messages={messages} isShared={false} session={session} />
         ) : (
-          <EmptyScreen />
+          <div className="flex justify-center items-center h-full">
+            <EmptyScreen
+              id={id}
+              input={input}
+              setInput={setInput}
+              isAtBottom={isAtBottom}
+              scrollToBottom={scrollToBottom}
+            />
+          </div>
         )}
         <div className="w-full h-px" ref={visibilityRef} />
+        {/* <ChatPanel
+          id={id}
+          input={input}
+          setInput={setInput}
+          isAtBottom={isAtBottom}
+          scrollToBottom={scrollToBottom}
+        /> */}
+
+        <div className="mx-auto w-full sm:max-w-2xl ">
+          <PromptForm input={input} setInput={setInput} />
+        </div>
+        {/* <div className="space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
+          <FooterText className="hidden sm:block" />
+        </div> */}
+        {/* <footer className="w-full border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
+          <FooterText className="hidden sm:block" />
+        </footer> */}
       </div>
-      <ChatPanel
-        id={id}
-        input={input}
-        setInput={setInput}
-        isAtBottom={isAtBottom}
-        scrollToBottom={scrollToBottom}
-      />
     </div>
   )
 }

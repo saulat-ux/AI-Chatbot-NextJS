@@ -7,6 +7,7 @@ import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
+import { FooterText } from '@/components/footer'
 
 export const metadata = {
   metadataBase: process.env.VERCEL_URL
@@ -60,6 +61,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </div>
           <TailwindIndicator />
         </Providers>
+        <div className="w-full border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
+          <FooterText className="" />
+        </div>
       </body>
     </html>
   )
